@@ -3,64 +3,108 @@ const popup = document.getElementById('popup');
 const popupMessage = document.getElementById('popupMessage');
 const popupClose = document.getElementById('popupClose');
 
-// Hide popup when the page loads
+// Ensure the popup is hidden when the page loads
 window.addEventListener('load', () => {
-    popup.style.display = 'none'; // Ensure the popup is hidden when the page is loaded
+    popup.style.display = 'none';
 });
 
+// Listen for form submission
 form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Prevent form submission for validation
+    e.preventDefault(); // Prevent default form submission
 
-    const firstName = document.getElementById('firstName').value.trim();
-    const lastName = document.getElementById('lastName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    // Get input values
+    const formData = {
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        password: document.getElementById('password').value.trim(),
+        confirmPassword: document.getElementById('confirmPassword').value.trim(),
+    };
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const validationMessage = validateForm(formData);
 
-    let message = '';
-
-    // Validation checks
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        message = 'All fields are required!';
-    } else if (!emailRegex.test(email)) {
-        message = 'Please enter a valid email address.';
-    } else if (password !== confirmPassword) {
-        message = 'Passwords do not match.';
-    }
-
-    if (message) {
-        showPopup(message, 'error');
+    if (validationMessage) {
+        showPopup(validationMessage, 'error');
     } else {
+        // Simulate a successful form submission
         showPopup('Form submitted successfully!', 'success');
-        form.reset(); // Reset form fields on success
+        form.reset(); // Reset form after submission
     }
 });
 
+// Close the popup when the close button is clicked
 popupClose.addEventListener('click', () => {
-    popup.style.display = 'none'; // Hide popup when close button is clicked
+    popup.style.display = 'none';
 });
 
-// Show popup with message and type (success or error)
+// Show popup with the specified message and type (success or error)
 function showPopup(message, type) {
     popupMessage.innerText = message;
     popup.className = `popup ${type}`;
-    popup.style.display = 'block'; // Show popup
-    // setTimeout(() => {
-    //     popup.style.display = 'none'; // Auto-close popup after 3 seconds
-    // }, 3000);
+    popup.style.display = 'block';
 }
 
+// Validate form data on the client-side
+function validateForm({ firstName, lastName, email, password, confirmPassword }) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check for empty fields
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        return 'All fields are required!';
+    }
+
+    // Validate email format
+    if (!emailRegex.test(email)) {
+        return 'Please enter a valid email address.';
+    }
+
+    // Validate password length
+    if (password.length < 8) {
+        return 'Password must be at least 8 characters long.';
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        return 'Passwords do not match.';
+    }
+
+    // Check for malicious script tags or inline event handlers
+    if (containsScriptOrEventHandlers(firstName, lastName, email, password, confirmPassword)) {
+        return 'Invalid input: Script tags or event handlers are not allowed.';
+    }
+
+    return null; // No validation errors
+}
+
+// Function to check for script tags or event handlers
+function containsScriptOrEventHandlers(...inputs) {
+    const forbiddenPatterns = [
+        /<script.*?>.*?<\/script>/i,    // Script tags
+        /on\w+=".*?"/i,                 // Inline event handlers (onmouseover, onclick, etc.)
+        /javascript:/i                  // 'javascript:' pseudo-protocol in links
+    ];
+
+    return inputs.some(input => {
+        return forbiddenPatterns.some(pattern => pattern.test(input));
+    });
+}
+
+// Sanitize input to prevent XSS attacks
+function sanitizeInput(input) {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerText = input; // Use innerText to escape HTML characters
+    return tempDiv.innerHTML; // Return the sanitized content
+}
+
+// Password input interaction for animation (optional feature)
 const passwordInput = document.getElementById('password');
 const passwordEmoji = document.getElementById('passwordEmoji');
 
-// Listen for typing in the password field
-passwordInput.addEventListener('input', () => {
+// Add animation when typing starts in the password field
+passwordInput?.addEventListener('input', () => {
     if (passwordInput.value.length > 0) {
-        passwordEmoji.classList.add('animated'); // Add animation class when typing starts
+        passwordEmoji?.classList.add('animated');
     } else {
-        passwordEmoji.classList.remove('animated'); // Remove animation if input is empty
+        passwordEmoji?.classList.remove('animated');
     }
 });
-
