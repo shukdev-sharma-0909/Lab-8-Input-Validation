@@ -1,0 +1,355 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Container */
+.form-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #6e8efb;
+    outline: none;
+    box-shadow: 0 0 5px rgba(110, 142, 251, 0.5);
+}
+
+/* Submit Button */
+.submit-btn {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #a777e3, #6e8efb);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* General Reset */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popup Styling */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 50;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Transparent dark overlay */
+    z-index: 1000;
+    display: flex; /* Flexbox to center the content */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+}
+
+
+.popup-content {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.5s ease-in-out;
+    border-top: 5px solid transparent; /* Updated for type-specific borders */
+}
+
+.popup-content p {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.popup-close-btn {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.popup-close-btn:hover {
+    background: linear-gradient(135deg, #a777e3, #6e8efb);
+    transform: scale(1.05);
+}
+
+/* Popup Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Type-Specific Borders */
+.popup.success .popup-content {
+    border-top-color: #28a745; /* Green for success */
+}
+
+.popup.error .popup-content {
+    border-top-color: #dc3545; /* Red for error */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .popup-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .popup-close-btn {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}
+
+
+/* Emoji Visibility and Animation */
+.password-emoji {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    opacity: 0;  /* Hide initially */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    padding-left: 35px; /* Add space for the emoji */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Animation for Emoji (Eye covered effect) */
+.password-emoji.animated {
+    opacity: 1;
+    animation: eyeCoverAnimation 2s infinite; /* Infinite animation for emoji */
+}
+
+@keyframes eyeCoverAnimation {
+    0% {
+        content: "👁️"; /* Normal eye */
+    }
+    50% {
+        content: "👁️‍🗨️"; /* One eye covered emoji */
+    }
+    100% {
+        content: "👁️"; /* Back to normal eye */
+    }
+}
+
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Behind everything */
+    opacity: 100; /* Adjust transparency */
+}
+
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('./screenshots/yellowboll.mp4'); /* Add your background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Glass Card Effect */
+.form-container {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Apply blur to background */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+}
+
+/* Form Title */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+    color: #fff; /* Text color */
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Popup */
+.popup {
+    display: none; /* Hidden initially */
+    position: fixed;
+    inset: 0; /* Full screen */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.popup .error .popup-content {
+    border-top: 5px solid #dc3545; /* Red border for error */
+}
+
+.popup .success .popup-content {
+    border-top: 5px solid #28a745; /* Green border for success */
+}
+
+.popup-close-btn {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.popup-close-btn:hover {
+    background: #218838;
+}
+
